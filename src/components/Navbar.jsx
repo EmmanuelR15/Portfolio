@@ -75,13 +75,13 @@ const Navbar = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
           isScrolled 
             ? 'bg-white/95 backdrop-blur-md shadow-lg' 
             : 'bg-white/90 backdrop-blur-sm shadow-md'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <motion.div 
@@ -147,7 +147,7 @@ const Navbar = () => {
             animate="animate"
             exit="exit"
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="md:hidden fixed top-16 left-0 right-0 overflow-hidden bg-white/95 backdrop-blur-md shadow-lg border-t border-gray-200 z-40"
+            className="md:hidden fixed top-16 left-0 right-0 w-full overflow-hidden bg-white/95 backdrop-blur-md shadow-lg border-t border-gray-200 z-40"
           >
             <div className="flex flex-col p-4 space-y-2">
               {navItems.map((item) => (
