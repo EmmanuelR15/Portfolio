@@ -166,6 +166,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
+                    autoComplete="name"
                     className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-purple-400/50 text-white placeholder-white/50 transition-all duration-300 focus-ring"
                     placeholder="Tu nombre completo"
                   />
@@ -182,6 +183,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
+                    autoComplete="email"
                     className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-purple-400/50 text-white placeholder-white/50 transition-all duration-300 focus-ring"
                     placeholder="tu.email@ejemplo.com"
                   />
@@ -197,6 +199,7 @@ const Contact = () => {
                     value={formData.message}
                     onChange={handleInputChange}
                     required
+                    autoComplete="off"
                     rows={5}
                     className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-purple-400/50 text-white placeholder-white/50 transition-all duration-300 resize-none focus-ring"
                     placeholder="Cuéntame sobre tu proyecto..."

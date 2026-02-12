@@ -3,7 +3,26 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const Navbar = ({ isScrolled, activeSection }) => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  // Estado inicial forzado a cerrado con lazy initialization
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(() => {
+    // Garantizar estado cerrado incluso antes del primer render
+    return false;
+  });
+
+  // Triple garantía: asegurar que esté cerrado al montar
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+    // También forzar cierre del menú en el DOM
+    const mobileMenu = document.querySelector('[data-mobile-menu]');
+    if (mobileMenu) {
+      mobileMenu.style.display = 'none';
+    }
+  }, []);
+
+  // Cerrar menú cuando se cambia de sección
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [activeSection]);
 
   const navItems = [
     { id: "home", label: "Inicio" },
@@ -44,17 +63,21 @@ const Navbar = ({ isScrolled, activeSection }) => {
   };
 
   const mobileMenuVariants = {
-    initial: { opacity: 0, height: 0 },
-    animate: {
-      opacity: 1,
-      height: "auto",
-      transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
-    },
-    exit: {
-      opacity: 0,
+    initial: { 
+      opacity: 0, 
       height: 0,
-      transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0 }
     },
+    animate: { 
+      opacity: 1, 
+      height: "auto",
+      transition: { duration: 0.3, ease: "easeInOut" }
+    },
+    exit: { 
+      opacity: 0, 
+      height: 0,
+      transition: { duration: 0.2, ease: "easeInOut" }
+    }
   };
 
   return (
@@ -140,14 +163,14 @@ const Navbar = ({ isScrolled, activeSection }) => {
           </div>
         </div>
 
-        <AnimatePresence>
+        {/* Mobile Navigation */}
+        <AnimatePresence mode="wait">
           {isMobileMenuOpen && (
             <motion.div
-              className={`md:hidden overflow-hidden transition-colors ${
-                isScrolled
-                  ? "bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-lg"
-                  : "bg-gray-900/95 dark:bg-gray-900/98 backdrop-blur-md border-t border-gray-700"
-              }`}
+              key="mobile-menu"
+              data-mobile-menu="true"
+              style={{ display: isMobileMenuOpen ? 'block' : 'none' }}
+              className="md:hidden overflow-hidden bg-gray-900/95 backdrop-blur-md border-t border-gray-700"
               variants={mobileMenuVariants}
               initial="initial"
               animate="animate"
@@ -161,9 +184,7 @@ const Navbar = ({ isScrolled, activeSection }) => {
                     className={`relative block w-full text-left pl-5 pr-4 py-3 sm:py-3.5 rounded-lg text-sm sm:text-base font-medium transition-all duration-300 focus-ring min-h-[48px] ${
                       activeSection === item.id
                         ? "text-white bg-gradient-to-r from-purple-600 to-blue-600 shadow-md"
-                        : isScrolled
-                          ? "text-gray-900 dark:text-gray-200 hover:bg-purple-50 dark:hover:bg-purple-900/20"
-                          : "text-white hover:bg-white/10"
+                        : "text-white hover:bg-white/10"
                     }`}
                     whileHover={{ x: 6 }}
                     whileTap={{ scale: 0.98 }}
