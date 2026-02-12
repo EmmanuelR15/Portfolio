@@ -4,10 +4,36 @@ import {
   Code2, 
   Database, 
   Server, 
-  Wrench,
-  FileCode,
-  Smartphone
+  Wrench
 } from 'lucide-react';
+import {
+  FaHtml5,
+  FaCss3Alt,
+  FaJs,
+  FaReact,
+  FaVuejs,
+  FaNode,
+  FaPython,
+  FaJava,
+  FaGit,
+  FaGithub,
+  FaDocker,
+  FaLinux
+} from 'react-icons/fa';
+import {
+  SiTypescript,
+  SiTailwindcss,
+  SiNextdotjs,
+  SiExpress,
+  SiDjango,
+  SiFlask,
+  SiMongodb,
+  SiPostgresql,
+  SiMysql,
+  SiRedis,
+  SiPostman
+} from 'react-icons/si';
+import { VscCode } from 'react-icons/vsc';
 
 const Skills = () => {
   const [activeTab, setActiveTab] = useState('frontend');
@@ -21,36 +47,36 @@ const Skills = () => {
 
   const skillsData = {
     frontend: [
-      { name: 'HTML5', icon: FileCode },
-      { name: 'CSS3', icon: FileCode },
-      { name: 'JavaScript', icon: Code2 },
-      { name: 'TypeScript', icon: Code2 },
-      { name: 'React', icon: Code2 },
-      { name: 'Tailwind CSS', icon: FileCode },
-      { name: 'Vue.js', icon: Code2 },
-      { name: 'Next.js', icon: Code2 }
+      { name: 'HTML5', icon: FaHtml5, color: '#E34C26' },
+      { name: 'CSS3', icon: FaCss3Alt, color: '#1572B6' },
+      { name: 'JavaScript', icon: FaJs, color: '#F7DF1E' },
+      { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
+      { name: 'React', icon: FaReact, color: '#61DAFB' },
+      { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06B6D4' },
+      { name: 'Vue.js', icon: FaVuejs, color: '#4FC08D' },
+      { name: 'Next.js', icon: SiNextdotjs, color: '#FFFFFF' }
     ],
     backend: [
-      { name: 'Node.js', icon: Server },
-      { name: 'Express', icon: Server },
-      { name: 'Python', icon: Code2 },
-      { name: 'Django', icon: Server },
-      { name: 'Flask', icon: Server },
-      { name: 'Java', icon: Code2 }
+      { name: 'Node.js', icon: FaNode, color: '#339933' },
+      { name: 'Express', icon: SiExpress, color: '#FFFFFF' },
+      { name: 'Python', icon: FaPython, color: '#3776AB' },
+      { name: 'Django', icon: SiDjango, color: '#092E20' },
+      { name: 'Flask', icon: SiFlask, color: '#FFFFFF' },
+      { name: 'Java', icon: FaJava, color: '#007396' }
     ],
     databases: [
-      { name: 'MongoDB', icon: Database },
-      { name: 'PostgreSQL', icon: Database },
-      { name: 'MySQL', icon: Database },
-      { name: 'Redis', icon: Database }
+      { name: 'MongoDB', icon: SiMongodb, color: '#13AA52' },
+      { name: 'PostgreSQL', icon: SiPostgresql, color: '#336791' },
+      { name: 'MySQL', icon: SiMysql, color: '#00758F' },
+      { name: 'Redis', icon: SiRedis, color: '#DC382D' }
     ],
     tools: [
-      { name: 'Git', icon: Wrench },
-      { name: 'GitHub', icon: Wrench },
-      { name: 'Docker', icon: Wrench },
-      { name: 'Linux', icon: Wrench },
-      { name: 'VS Code', icon: Wrench },
-      { name: 'Postman', icon: Wrench }
+      { name: 'Git', icon: FaGit, color: '#F1502F' },
+      { name: 'GitHub', icon: FaGithub, color: '#181717' },
+      { name: 'Docker', icon: FaDocker, color: '#2496ED' },
+      { name: 'Linux', icon: FaLinux, color: '#FCC624' },
+      { name: 'VS Code', icon: VscCode, color: '#007ACC' },
+      { name: 'Postman', icon: SiPostman, color: '#FF6C37' }
     ]
   };
 
@@ -103,7 +129,7 @@ const Skills = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 px-2 sm:px-4 md:px-0"
+            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 px-2 sm:px-4 md:px-0"
           >
             {skillsData[activeTab].map((skill, index) => (
               <motion.div
@@ -112,17 +138,28 @@ const Skills = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.05, type: 'spring', stiffness: 400, damping: 28 }}
                 whileHover={{ 
-                  scale: 1.03, 
-                  y: -4,
-                  boxShadow: "0 12px 28px rgba(124, 58, 237, 0.18)"
+                  scale: 1.05, 
+                  y: -6,
+                  boxShadow: "0 20px 40px rgba(124, 58, 237, 0.25)"
                 }}
-                className="bg-gray-700 border border-gray-600 rounded-xl p-4 sm:p-5 lg:p-6 hover:border-purple-500/50 transition-all duration-300 group"
+                className="bg-gray-700 border border-gray-600 rounded-xl p-4 sm:p-5 lg:p-6 hover:border-purple-500/70 transition-all duration-300 group flex flex-col items-center justify-center"
               >
-                <div className="flex flex-col items-center gap-2 sm:gap-3">
-                  <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full flex items-center justify-center bg-gradient-to-br from-purple-500/30 to-blue-500/30 group-hover:from-purple-400 group-hover:to-blue-400 transition-all duration-300 group-hover:scale-110 flex-shrink-0">
-                    <skill.icon className="w-5 h-5 sm:w-6 sm:h-6 text-purple-300 group-hover:text-white transition-colors duration-300" aria-hidden="true" />
-                  </div>
-                  <span className="font-semibold text-gray-200 text-center text-xs sm:text-sm md:text-base">
+                <div className="flex flex-col items-center gap-3 sm:gap-4">
+                  <motion.div 
+                    className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-16 md:h-16 lg:w-16 lg:h-16 rounded-full flex items-center justify-center bg-gradient-to-br from-gray-600 to-gray-700 group-hover:from-gray-500 group-hover:to-gray-600 transition-all duration-300 flex-shrink-0 shadow-lg"
+                    whileHover={{ rotate: 360, transition: { duration: 0.6 } }}
+                  >
+                    <skill.icon 
+                      className="w-7 h-7 sm:w-8 sm:h-8 md:w-8 md:h-8 transition-all duration-300 group-hover:scale-125" 
+                      style={{ color: skill.color }}
+                      aria-hidden="true"
+                    />
+                  </motion.div>
+                  <span 
+                    className="font-semibold text-gray-200 text-center text-xs sm:text-sm md:text-base group-hover:text-white transition-colors duration-300"
+                    role="img"
+                    aria-label={`Habilidad: ${skill.name}`}
+                  >
                     {skill.name}
                   </span>
                 </div>
