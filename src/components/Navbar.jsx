@@ -2,21 +2,12 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
-const Navbar = ({ activeSection }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
+const Navbar = ({ isScrolled = false, activeSection = 'home' }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Forzar estado inicial cerrado
   useEffect(() => {
     setIsMobileMenuOpen(false);
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Cerrar menú cuando se cambia de sección
@@ -85,7 +76,7 @@ const Navbar = ({ activeSection }) => {
       <motion.nav
         role="navigation"
         aria-label="Menú principal"
-        className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 w-full z-50 overflow-hidden transition-all duration-300 ${
           isScrolled ? "glass-morphism shadow-lg" : "bg-transparent"
         }`}
         variants={navbarVariants}
