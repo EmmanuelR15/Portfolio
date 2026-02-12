@@ -143,9 +143,10 @@ const Projects = () => {
           </motion.div>
         </div>
 
-        {/* Projects Grid - 1 col móvil, 2 tablet, 3 desktop */}
+        {/* Projects Grid - Con altura consistente para todas las cards */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 h-full"
+          style={{ gridAutoRows: '1fr' }}
           variants={containerVariants}
           initial="initial"
           animate={isVisible ? "animate" : "initial"}
@@ -153,7 +154,7 @@ const Projects = () => {
           {Array.isArray(filteredProjects) && filteredProjects.map((project, index) => (
             <motion.div
               key={project.id}
-              className="bg-gray-800 border border-gray-700 rounded-xl overflow-hidden shadow-lg transition-all duration-300 group"
+              className="bg-gray-800 border border-gray-700 rounded-xl overflow-hidden shadow-lg transition-all duration-300 group flex flex-col h-full"
               variants={cardVariants}
               initial="initial"
               animate="animate"
@@ -162,7 +163,7 @@ const Projects = () => {
               transition={{ type: 'spring', stiffness: 400, damping: 30 }}
             >
               {/* Project Image */}
-              <div className={`relative h-40 sm:h-48 bg-gradient-to-br ${project.gradient} overflow-hidden flex items-center justify-center`}>
+              <div className={`relative h-40 sm:h-48 bg-gradient-to-br ${project.gradient} overflow-hidden flex items-center justify-center flex-shrink-0`}>
                 <img 
                   src={`/images/projects/${project.image}.png`}
                   alt={project.title}
@@ -174,35 +175,37 @@ const Projects = () => {
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
               </div>
 
-              {/* Project Content - padding reducido en móvil */}
-              <div className="p-4 sm:p-5 lg:p-6">
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-1.5 sm:mb-2 group-hover:text-purple-300 transition-colors">
-                  {project.title}
-                </h3>
-                
-                <p className="text-gray-400 mb-3 sm:mb-4 line-clamp-3 text-sm sm:text-base">
-                  {project.description}
-                </p>
+              {/* Project Content - Flex container para distribuir contenido y botón */}
+              <div className="p-4 sm:p-5 lg:p-6 flex flex-col flex-grow">
+                <div className="flex-grow">
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-1.5 sm:mb-2 group-hover:text-purple-300 transition-colors">
+                    {project.title}
+                  </h3>
+                  
+                  <p className="text-gray-400 mb-3 sm:mb-4 line-clamp-3 text-sm sm:text-base">
+                    {project.description}
+                  </p>
+                </div>
 
-                {/* Tech Stack */}
+                {/* Tech Stack - Contenedor horizontal con scroll si es necesario */}
                 <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6">
                   {project.tech.slice(0, 3).map((tech) => (
                     <span
                       key={tech}
-                      className="px-2.5 sm:px-3 py-0.5 sm:py-1 bg-purple-500/20 text-purple-300 text-xs sm:text-sm rounded-full font-medium border border-purple-500/30"
+                      className="px-2.5 sm:px-3 py-0.5 sm:py-1 bg-purple-500/20 text-purple-300 text-xs sm:text-sm rounded-full font-medium border border-purple-500/30 whitespace-nowrap"
                     >
                       {tech}
                     </span>
                   ))}
                   {project.tech.length > 3 && (
-                    <span className="px-3 py-1 bg-gray-600 text-gray-300 text-sm rounded-full">
+                    <span className="px-3 py-1 bg-gray-600 text-gray-300 text-xs sm:text-sm rounded-full font-medium whitespace-nowrap">
                       +{project.tech.length - 3}
                     </span>
                   )}
                 </div>
 
-                {/* Action Button - Solo GitHub */}
-                <div className="flex gap-3">
+                {/* Action Button - Empujado al pie con mt-auto */}
+                <div className="flex gap-3 mt-auto">
                   <motion.a
                     href={project.githubUrl}
                     target="_blank"
