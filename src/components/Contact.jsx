@@ -81,13 +81,6 @@ const Contact = () => {
       external: false,
     },
     {
-      icon: Phone,
-      label: 'Teléfono',
-      value: '+54 9 362 4-123456',
-      href: 'tel:+5493624123456',
-      external: false,
-    },
-    {
       icon: MapPin,
       label: 'Ubicación',
       value: 'Resistencia, Chaco, Argentina',
